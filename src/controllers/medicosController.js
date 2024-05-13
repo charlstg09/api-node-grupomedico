@@ -32,7 +32,7 @@ export const putMedico =  async (req,res) => {
 
         const {id} = req.params;
     const {nombre, apellido, correo,numero,cedula,especialidad, } = req.body;
-    const result = await pool.query("UPDATE MEDICOS SET  nombre=$1, apellido=$2, correo=$3, numero=$4, cedula=$5, especialidad=$6, where idMedico = $7   RETURNING *", [nombre,apellido,correo,numero,cedula,especialidad, id] )
+    const result = await pool.query("UPDATE MEDICOS SET  nombre=$1, apellido=$2, correo=$3, numero=$4, cedula=$5, especialidad=$6 where idMedico = $7   RETURNING *", [nombre,apellido,correo,numero,cedula,especialidad, id] )
     if(result.rowCount === 0) {
         return res.status(404).json({ message: "Usuario no encontrado" });
     }
