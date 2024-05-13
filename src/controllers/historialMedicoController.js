@@ -9,6 +9,28 @@ export const getHistorial = async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor" });
     }
 }
+export const getHistorialByMedico = async (req, res) => {
+    try {
+        const { idMedico } = req.params;
+        const { rows } = await pool.query("SELECT * FROM historialMedico WHERE idMedico = $1", [idMedico]);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al obtener historiales por médico:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+}
+
+export const getHistorialByUsuario = async (req, res) => {
+    try {
+        const { idUsuario } = req.params;
+        const { rows } = await pool.query("SELECT * FROM historialMedico WHERE idUsuario = $1", [idUsuario]);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al obtener historiales por usuario:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+}
+
 
 export const getHistorialId = async (req, res) => {
     try {
